@@ -1,4 +1,4 @@
-package tpe.src;
+package com.tpe;
 import java.util.ArrayList;
 
 public class Factura {

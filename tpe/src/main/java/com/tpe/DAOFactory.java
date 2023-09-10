@@ -1,4 +1,4 @@
-package tpe.src;
+package com.tpe;
 public abstract class DAOFactory {
   public static final int MYSQL_JDBC = 1;
 

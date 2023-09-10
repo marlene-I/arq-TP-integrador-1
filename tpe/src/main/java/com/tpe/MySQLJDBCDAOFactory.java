@@ -1,4 +1,4 @@
-package tpe.src;
+package com.tpe;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,13 +8,11 @@ import java.sql.SQLException;
 
 public class MySQLJDBCDAOFactory extends DAOFactory{
 
-  
-  static String driver = "REEMPLAZAR";
-  static String uri = "REEMPLAZAR";
-  static String user = "REEMPLAZAR";
-  static String password = "REEMPLAZAR";
-  // TODO: ADD user & password
-  
+  static String driver = "com.mysql.cj.jdbc.Driver";
+  static String uri = "jdbc:mysql://localhost:3306/tpe1";
+  static String user = "root";
+  static String password = "password";
+   
   public static Connection createConnection() {
   // Use DRIVER and DBURL to create a connection
     try {
@@ -32,6 +30,7 @@ public class MySQLJDBCDAOFactory extends DAOFactory{
         throw new RuntimeException(ex);
     } catch (SQLException e) {
         e.printStackTrace();
+        throw new RuntimeException(e);        
     }
   }
 

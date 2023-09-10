@@ -1,4 +1,4 @@
-package tpe.src;
+package com.tpe;
 public class MySQLFacturaDAO implements FacturaDAO{
 
   @Override
@@ -9,16 +9,16 @@ public class MySQLFacturaDAO implements FacturaDAO{
     // INNER JOIN factura_producto fp ON f.idFactura = fp.idFactura // inner join de factura_producto - producto
     // INNER JOIN cliente c ON f.idCliente = c.idCliente 
     // WHERE idFactura == " + id;
+ /////////////////////////////////////////////////////////////////
+    // Factura factura= new Factura(...); // pasarle los datos de clientes y productos y que lo arme 
+    // Cliente cliente = new Cliente (...);
+    // // iterar sobre los productos
 
-    Factura factura= new Factura(...); // pasarle los datos de clientes y productos y que lo arme 
-    Cliente cliente = new Cliente (...);
-    // iterar sobre los productos
-
-    ArrayList<Producto> prods = new ArrayList();
-    for (int i = 0; i < prods.length; i++) {
-      Producto prod = new Producto(...);
-      prods.push(prod);
-    }
+    // ArrayList<Producto> prods = new ArrayList();
+    // for (int i = 0; i < prods.length; i++) {
+    //   Producto prod = new Producto(...);
+    //   prods.push(prod);
+    // }
     return null;
   }
   // 1. trae todo con solo select y arma los DTOS de Producto y Cliente 
