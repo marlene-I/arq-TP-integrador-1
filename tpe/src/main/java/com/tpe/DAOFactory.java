@@ -1,4 +1,7 @@
 package com.tpe;
+
+import java.sql.Connection;
+
 public abstract class DAOFactory {
   public static final int MYSQL_JDBC = 1;
 
@@ -7,9 +10,9 @@ public abstract class DAOFactory {
   public abstract ClienteDAO getClienteDAO();
 
   public static DAOFactory getDAOFactory(int whichFactory) {
-  switch (whichFactory) {
-    case MYSQL_JDBC : return new MySQLJDBCDAOFactory();
-    default: return null;
-  }
-} 
+    switch (whichFactory) {
+      case MYSQL_JDBC : return new MySQLJDBCDAOFactory();
+        default: return null;
+    }
+  } 
 }

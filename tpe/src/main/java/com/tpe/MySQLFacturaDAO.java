@@ -1,5 +1,11 @@
 package com.tpe;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class MySQLFacturaDAO implements FacturaDAO{
+
 
   @Override
   public Factura getFactura(Integer id) {
@@ -26,6 +32,32 @@ public class MySQLFacturaDAO implements FacturaDAO{
   // 2. en base a el id de factura, consulta al MySQLClienteDAO y obtiene el cliente
   // correspondiente a la factura. Lo mismo hace para obtener los productos
   // asociados a la factura.
+
+  @Override
+  public void insert(Factura element) throws SQLException {
+    String query = "INSERT INTO factura (idFactura, idCliente) VALUES (?, ?)";
+    
+    Connection conn = MySQLJDBCDAOFactory.getConnection();
+
+    PreparedStatement ps = conn.prepareStatement(query);
+
+    ps.setInt(1, element.getId());
+    ps.setInt(2, element.getIdCliente());
+    ps.executeUpdate();
+
+  }
+
+  @Override
+  public void createTable() throws SQLException {
+    Connection conn = MySQLJDBCDAOFactory.getConnection();
+
+    String query = "CREATE TABLE factura(idFactura INT, idCliente INT)";
+  
+    PreparedStatement ps = conn.prepareStatement(query);
+
+    ps.execute();
+    conn.commit();
+  }
 }
 
 

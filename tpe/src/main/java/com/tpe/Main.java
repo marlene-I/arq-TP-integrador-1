@@ -1,29 +1,48 @@
 package com.tpe;
 
-import java.lang.reflect.InvocationTargetException;
+import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.mysql.cj.xdevapi.Client;
 
 public class Main {
 
   public static void main(String[] args) {
 
-      // TODO: cargar los CSV
-      // VER SI CREAMOS UNA CLASE O QUE
+    DAOFactory mysqlDaoFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL_JDBC);
+  
+    // // // 2. pedirle a la dbFactory los DAOS de entidades requeridos
+    FacturaDAO daoFactura = mysqlDaoFactory.getFacturaDAO();
+    try {
+      daoFactura.createTable();
+      CSVLoader loader = new CSVLoader();
+      loader.loadFacturas(daoFactura);
+          
+      
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
 
+
+      // try {
+      //   String pathCSVProductos = "C:\\Users\\Maarl\\Downloads\\Materias\\TUDAI\\ARQUI\\TP1\\TPE\\tpe\\src\\main\\resources\\productos.csv";
+      //   ClientCreator cCreator = new ClientCreator();
+      //   loader.read1(pathCSVProductos);
+
+        
+      // } catch (IOException e) {
+      //   System.out.println(e);
+      // } 
+      // ClienteDAO clienteDAO = mysqlDaoFactory.getClienteDAO();
     
-      // // 1. pedirle la instancia de dbFactory deseada al daoFactory 
-      DAOFactory mysqlDaoFactory = DAOFactory.getDAOFactory(1);
-    
-      // // 2. pedirle a la dbFactory los DAOS de entidades requeridos
-      FacturaDAO daoFactura = mysqlDaoFactory.getFacturaDAO();
 
       
       // // 3. ejecutar lo que pide el enunciado
-      Factura factura = daoFactura.getFactura(123);
+      // Factura factura = daoFactura.getFactura(123);
       // ProductoDAO daoProducto = mysqlDaoFactory.getProductoDAO();
       // ClienteDAO daoCliente = mysqlDaoFactory.getClienteDAO();
     
@@ -47,6 +66,25 @@ public class Main {
     // }
   }
 
+  // private static void initializeDB() throws SQLException{
+  //   MySQLConnector connector = new MySQLConnector();
+  //   Connection conn = connector.getConnection();
+
+  //   ArrayList<String> queries = new ArrayList<String>();
+  //   queries.add("CREATE TABLE cliente(idCliente INT, nombre VARCHAR(200), email VARCHAR(200))");
+  //   queries.add("CREATE TABLE factura(idFactura INT, idCliente INT)");
+  //   queries.add("CREATE TABLE producto(idProducto INT, nombre VARCHAR(200), valor INT)");
+  //   queries.add("CREATE TABLE factura_producto(idFactura INT, idProducto INT, cantidad INT)");
+
+  //   for (String query : queries) {
+  //     PreparedStatement ps = conn.prepareStatement(query);
+  //     ps.execute();
+  //   }
+
+  //   conn.commit();
+  //   conn.close();
+  // }
+
   private static void selectAll(Connection conn)  throws SQLException{
     String query = "SELECT * FROM people";
     PreparedStatement ps = conn.prepareStatement(query);
@@ -58,8 +96,9 @@ public class Main {
     ps.executeQuery();
     ps.close();
   }
+
   private static void addPerson(Connection connection, int id, String name, int age) throws SQLException {
-        String query = "INSERT INTO people (id, name, age, adress_id) VALUES (?,?,?,?)";
+        String query = "INSERT INTO people (id, name, age, adress_id) VALUES (?,?,?,?), ()";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, id);
         ps.setString(2, name);
@@ -75,7 +114,7 @@ public class Main {
     String query = "CREATE TABLE people(id INT, name VARCHAR(200), age INT, adress_id INT, PRIMARY KEY(id))";
     connection.prepareStatement(query).execute();
     connection.commit();
-}
+  }
 
   
 }
