@@ -16,9 +16,12 @@ public class Main {
     DAOFactory mysqlDaoFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL_JDBC);
   
     // // // 2. pedirle a la dbFactory los DAOS de entidades requeridos
-    FacturaDAO daoFactura = mysqlDaoFactory.getFacturaDAO();
-    try {
-      daoFactura.createTable();
+      FacturaDAO daoFactura = mysqlDaoFactory.getFacturaDAO();
+      ClienteDAO daoCliente = mysqlDaoFactory.getClienteDAO();
+      ProductoDAO daoProducto = mysqlDaoFactory.getProductoDAO();
+      FacturaProductoDAO daoFacturaProducto = mysqlDaoFactory.getFacturaProductoDAO();
+      try {
+        daoFactura.createTable();
       CSVLoader loader = new CSVLoader();
       loader.loadFacturas(daoFactura);
           
