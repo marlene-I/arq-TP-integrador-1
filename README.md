@@ -18,4 +18,5 @@ Se tienen clases DTOS con los atributos correspondientes a cada entidad.
   * Implementar el codigo de los DAOS (las clases que se comunican con la DB ej: MySQLFacturaDAO). Falta crear el MySQLClienteDAO.
 * Escribir la lógica del servicio.
 
+* Organizar en carpetas segun, DAO, Factory, DTOS, etc
 * Hacer MySQLDAOFactory singleton
