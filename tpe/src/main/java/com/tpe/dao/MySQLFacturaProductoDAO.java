@@ -1,8 +1,12 @@
-package com.tpe;
+package com.tpe.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import com.tpe.dto.FacturaProducto;
+import com.tpe.factory.MySQLJDBCDAOFactory;
+import com.tpe.interfaces.FacturaProductoDAO;
 
 public class MySQLFacturaProductoDAO implements FacturaProductoDAO{
 

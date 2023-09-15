@@ -1,8 +1,12 @@
-package com.tpe;
+package com.tpe.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import com.tpe.dto.Producto;
+import com.tpe.factory.MySQLJDBCDAOFactory;
+import com.tpe.interfaces.ProductoDAO;
 
 public class MySQLProductoDAO implements ProductoDAO{
 
@@ -40,6 +44,22 @@ public class MySQLProductoDAO implements ProductoDAO{
 
     ps.execute();
     conn.commit();
+  }
+  public Producto getProductoMayorRecaudacion() throws SQLException{
+    Connection conn = MySQLJDBCDAOFactory.getConnection();
+
+    String query = "SELECT p.idProducto, p.nombre AS nombre_producto, p.valor AS valor_unitario, SUM(fp.cantidad * p.valor) AS recaudacion_total " +
+            "FROM producto p " +
+            "JOIN factura_producto fp ON p.idProducto = fp.idProducto " +
+            "GROUP BY p.idProducto, p.nombre, p.valor " +
+            "ORDER BY recaudacion_total DESC " +
+            "LIMIT 1";
+
+    PreparedStatement ps = conn.prepareStatement(query);
+
+    ps.execute();
+    return null;
+
   }
 
 }

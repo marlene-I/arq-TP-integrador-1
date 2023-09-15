@@ -1,8 +1,12 @@
-package com.tpe;
+package com.tpe.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import com.tpe.dto.Cliente;
+import com.tpe.factory.MySQLJDBCDAOFactory;
+import com.tpe.interfaces.ClienteDAO;
 
 public class MySQLClienteDAO implements ClienteDAO{
 
@@ -44,5 +48,6 @@ public class MySQLClienteDAO implements ClienteDAO{
     ps.executeUpdate();
 
   }
+
   
 }

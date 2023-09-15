@@ -1,4 +1,4 @@
-package com.tpe;
+package com.tpe.dto;
 
 public class FacturaProducto {
   Integer idFactura;

@@ -1,4 +1,4 @@
-package com.tpe;
+package com.tpe.dto;
 
 public class Producto {
   Integer id;

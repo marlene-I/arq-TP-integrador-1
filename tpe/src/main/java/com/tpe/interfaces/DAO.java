@@ -1,4 +1,4 @@
-package com.tpe;
+package com.tpe.interfaces;
 
 import java.sql.SQLException;
 

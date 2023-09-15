@@ -1,6 +1,10 @@
-package com.tpe;
+package com.tpe.factory;
 
 import java.sql.Connection;
+
+import com.tpe.interfaces.ClienteDAO;
+import com.tpe.interfaces.FacturaDAO;
+import com.tpe.interfaces.ProductoDAO;
 
 public abstract class DAOFactory {
   public static final int MYSQL_JDBC = 1;

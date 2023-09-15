@@ -1,8 +1,15 @@
-package com.tpe;
+package com.tpe.factory;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import com.tpe.dao.MySQLClienteDAO;
+import com.tpe.dao.MySQLFacturaDAO;
+import com.tpe.dao.MySQLProductoDAO;
+import com.tpe.interfaces.ClienteDAO;
+import com.tpe.interfaces.FacturaDAO;
+import com.tpe.interfaces.ProductoDAO;
 
 
 
