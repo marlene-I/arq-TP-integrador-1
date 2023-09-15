@@ -1,13 +1,5 @@
 package com.tpe;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import com.mysql.cj.xdevapi.Client;
 import com.tpe.factory.DAOFactory;
 import com.tpe.interfaces.ClienteDAO;
 import com.tpe.interfaces.FacturaDAO;
