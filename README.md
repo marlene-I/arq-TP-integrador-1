@@ -20,9 +20,20 @@ Se tienen clases DTOS con los atributos correspondientes a cada entidad.
 
 * Hacer MySQLDAOFactory singleton
 
-## Generar plantuml
+## Generar plantuml (Diagrama de clases UML) en visual studio code
+ - Instalar la extension PlantUML 
+ - Descargar el archivo `java2plantuml.jar` de https://github.com/mirajp1/java2plantuml/tree/master/src/main/java
+ - Ejecutar en consola `java -jar java2plantuml.jar tpe/src/main/java/com/tpe`
+ * Se crea un archivo de output.puml
+ * Dentro de ese archivo click derecho y "Preview Current Diagram"
 
-`java -jar java2plantuml.jar tpe/src/main/java/com/tpe`
+![Alt text](DiagramaDeClases.svg)
+
+
+* PARA EXPORTAR COMO SVG click derecho dentro de output.puml
+* Export Current Diagram SVG
+* Crea una nueva carpeta con el archivo
+
 
 ## Cambiar contraseña en MySQL xampp
 
