@@ -10,5 +10,5 @@ public interface ClienteDAO extends DAO<Cliente> {
 
   public Cliente updateCliente(Integer id, String nombre, String email);
 
-  public List<Cliente> obtenerClientesQueMasFacturaron() throws SQLException;;
+  public List<Cliente> getClientesPorFacturacion() throws SQLException;;
 }

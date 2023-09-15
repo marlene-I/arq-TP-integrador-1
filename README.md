@@ -20,6 +20,9 @@ Se tienen clases DTOS con los atributos correspondientes a cada entidad.
 
 * Hacer MySQLDAOFactory singleton
 
+## Generar plantuml
+
+`java -jar java2plantuml.jar tpe/src/main/java/com/tpe`
 
 ## Cambiar contraseña en MySQL xampp
 

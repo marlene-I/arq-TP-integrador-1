@@ -1,0 +1,142 @@
+@startuml
+skinparam classAttributeIconSize 0
+class CSVLoader{
++ getParser(filePath : String) : CSVParser
++ loadClientes(daoCliente : DAO<Cliente>) : void
++ loadProductos(daoProducto : DAO<Producto>) : void
++ loadFacturas(daoFactura : DAO<Factura>) : void
++ loadFacturaProductos(daoFacturaProducto : DAO<FacturaProducto>) : void
+}
+class DAOFactory{
++ {static} MYSQL_JDBC : int
++ {abstract} getFacturaDAO() : FacturaDAO
++ {abstract} getProductoDAO() : ProductoDAO
++ {abstract} getClienteDAO() : ClienteDAO
++ {abstract} getFacturaProductoDAO() : FacturaProductoDAO
++ {static} getDAOFactory(whichFactory : int) : DAOFactory
+}
+class Producto{
+id : Integer
+nombre : String
+valor : Float
++ Producto(id : Integer, nombre : String, valor : Float)
++ getId() : Integer
++ setId(id : Integer) : void
++ getNombre() : String
++ setNombre(nombre : String) : void
++ getValor() : Float
++ setValor(valor : Float) : void
+}
+class MySQLFacturaDAO{
++ insert(element : Factura) : void
++ createTable() : void
+}
+MySQLFacturaDAO ..|> FacturaDAO
+class ProductoConTotal{
+total : Float
++ ProductoConTotal(id : Integer, nombre : String, valor : Float, total : Float)
++ getTotal() : Float
++ setTotal(total : Float) : void
+}
+ProductoConTotal --|> Producto
+class Factura{
+id : Integer
+idCliente : Integer
++ Factura(id : Integer, idCliente : Integer)
++ getId() : Integer
++ setId(id : Integer) : void
++ getIdCliente() : Integer
++ setIdCliente(idCliente : Integer) : void
+}
+class FacturaProducto{
+idFactura : Integer
+idProducto : Integer
+cantidad : Integer
++ FacturaProducto(idFactura : Integer, idProducto : Integer, cantidad : Integer)
++ getIdFactura() : Integer
++ setIdFactura(idFactura : Integer) : void
++ getIdProducto() : Integer
++ setIdProducto(idProducto : Integer) : void
++ getCantidad() : Integer
++ setCantidad(cantidad : Integer) : void
+}
+class Main{
++ {static} main(args : String[]) : void
+}
+class Cliente{
+id : Integer
+nombre : String
+email : String
+totalFacturacion : Float
++ Cliente()
++ Cliente(id : Integer, nombre : String, email : String)
++ getId() : Integer
++ setId(id : Integer) : void
++ getNombre() : String
++ setNombre(nombre : String) : void
++ getEmail() : String
++ setEmail(email : String) : void
+}
+class MySQLJDBCDAOFactory{
+{static} driver : String
+{static} uri : String
+{static} user : String
+{static} password : String
+{static} connection : Connection
++ {static} getConnection() : Connection
++ getFacturaDAO() : FacturaDAO
++ getProductoDAO() : ProductoDAO
++ getClienteDAO() : ClienteDAO
++ getFacturaProductoDAO() : FacturaProductoDAO
+}
+MySQLJDBCDAOFactory --|> DAOFactory
+class MySQLClienteDAO{
++ getCliente(id : Integer) : Cliente
++ updateCliente(id : Integer, nombre : String, email : String) : Cliente
++ createTable() : void
++ insert(element : Cliente) : void
++ getClientesPorFacturacion() : List<Cliente>
+}
+MySQLClienteDAO ..|> ClienteDAO
+class MySQLProductoDAO{
++ getProducto(id : Integer) : Producto
++ getProductosByIdFactura(idFactura : Integer) : ArrayList<Producto>
++ insert(element : Producto) : void
++ createTable() : void
++ getProductoMayorRecaudacion() : Producto
+}
+MySQLProductoDAO ..|> ProductoDAO
+class ClienteConFacturacion{
+totalFacturacion : Float
++ ClienteConFacturacion(id : Integer, nombre : String, email : String, totalFacturacion : Float)
++ getTotalFacturacion() : Float
++ setTotalFacturacion(totalFacturacion : Float) : void
+}
+ClienteConFacturacion --|> Cliente
+class MySQLFacturaProductoDAO{
++ insert(element : FacturaProducto) : void
++ createTable() : void
+}
+MySQLFacturaProductoDAO ..|> FacturaProductoDAO
+interface ProductoDAO{
++ getProducto(id : Integer) : Producto
++ getProductoMayorRecaudacion() : Producto
+}
+ProductoDAO --|> DAO
+interface ClienteDAO{
++ getCliente(id : Integer) : Cliente
++ updateCliente(id : Integer, nombre : String, email : String) : Cliente
++ getClientesPorFacturacion() : List<Cliente>
+}
+ClienteDAO --|> DAO
+interface FacturaDAO{
+}
+FacturaDAO --|> DAO
+interface FacturaProductoDAO{
+}
+FacturaProductoDAO --|> DAO
+interface DAO{
++ insert(element : T) : void
++ createTable() : void
+}
+@enduml

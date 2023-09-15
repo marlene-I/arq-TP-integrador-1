@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tpe.dto.Cliente;
+import com.tpe.dto.ClienteConFacturacion;
 import com.tpe.factory.MySQLJDBCDAOFactory;
 import com.tpe.interfaces.ClienteDAO;
 
@@ -53,8 +54,8 @@ public class MySQLClienteDAO implements ClienteDAO {
   }
 
   @Override
-  public List<Cliente> obtenerClientesQueMasFacturaron() throws SQLException {
-    ArrayList<Cliente> clientesMasFacturaron = new ArrayList<Cliente>();
+  public List<Cliente> getClientesPorFacturacion() throws SQLException {
+    ArrayList<Cliente> clientesPorFacturacion = new ArrayList<Cliente>();
       String query = "SELECT f.idCliente, c.nombre, c.email, SUM(facturaP.cantidad * prod.valor) AS total_facturado FROM factura_producto facturaP INNER JOIN producto prod ON prod.idProducto = facturaP.idProducto INNER JOIN factura f ON f.idFactura = facturaP.idFactura INNER JOIN cliente c ON c.idCliente = f.idCliente GROUP BY f.idCliente, c.nombre, c.email ORDER BY total_facturado DESC";
       Connection conn = MySQLJDBCDAOFactory.getConnection();
 
@@ -63,11 +64,11 @@ public class MySQLClienteDAO implements ClienteDAO {
       ResultSet rs = ps.executeQuery();
 
       while (rs.next()) {
-        Cliente cliente = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3));
-        clientesMasFacturaron.add(cliente);
+        Cliente cliente = new ClienteConFacturacion(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getFloat(4));
+        clientesPorFacturacion.add(cliente);
       }
     
-    return clientesMasFacturaron;
+    return clientesPorFacturacion;
   }
 
 }

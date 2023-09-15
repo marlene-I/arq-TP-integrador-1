@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import com.tpe.dto.Producto;
+import com.tpe.dto.ProductoConTotal;
 import com.tpe.factory.MySQLJDBCDAOFactory;
 import com.tpe.interfaces.ProductoDAO;
 
@@ -50,7 +51,7 @@ public class MySQLProductoDAO implements ProductoDAO {
   public Producto getProductoMayorRecaudacion() throws SQLException {
     Connection conn = MySQLJDBCDAOFactory.getConnection();
 
-    String query = "SELECT p.idProducto, p.nombre AS nombre_producto, p.valor AS valor_unitario, SUM(fp.cantidad * p.valor) AS recaudacion_total "
+    String query = "SELECT p.idProducto, p.nombre AS nombre_producto, p.valor AS valor, SUM(fp.cantidad * p.valor) AS recaudacion_total "
         +
         "FROM producto p " +
         "JOIN factura_producto fp ON p.idProducto = fp.idProducto " +
@@ -64,7 +65,8 @@ public class MySQLProductoDAO implements ProductoDAO {
       int idProducto = rs.getInt("idProducto");
       String nombre = rs.getString("nombre_producto");
       Float valorUnitario = rs.getFloat("valor");    
-      Producto producto = new Producto(idProducto, nombre, valorUnitario);
+      Float totalRecaudado = rs.getFloat("recaudacion_total");    
+      Producto producto = new ProductoConTotal(idProducto, nombre, valorUnitario, totalRecaudado);
       return producto;
     }
 

@@ -4,6 +4,7 @@ public class Cliente {
   Integer id;
   String nombre;
   String email;
+  Float totalFacturacion;
 
   public Cliente(){
     super();
