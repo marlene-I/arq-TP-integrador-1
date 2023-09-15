@@ -1,0 +1,44 @@
+@startuml name DERE
+'From this guide:
+' https://raphael-leger.medium.com/automatically-generating-up-to-date-database-diagrams-with-typeorm-d1279a20545e
+left to right direction
+skinparam linetype ortho
+hide footbox
+
+!define primary_key(x) <b><color:#b8861b><&key></color> x</b>
+!define foreign_key(x) <color:#aaaaaa><&key></color> x
+!define column(x) <color:#efefef><&media-record></color> x
+!define table(x) entity x << (T, white) >>
+
+
+table(Cliente){
+  primary_key( idCliente ): INT 
+  column( nombre ): VARCHAR (500)
+  column( email ): VARCHAR (150)
+  ---
+}
+
+table(Factura){
+  primary_key( idFactura ): INT 
+  foreign_key( idCliente ): INT 
+  ---
+}
+
+table(Producto){
+  primary_key( idProducto ): INT 
+  column( nombre ): VARCHAR (45) 
+  column( valor ): FLOAT
+  ---
+}
+
+table(Factura_Producto){
+  foreign_key( idFactura ): INT 
+  foreign_key( idProducto ): INT 
+  column( cantidad ): INT
+  ---
+}
+
+Cliente ||..|{ Factura
+Factura ||..|{ Factura_Producto
+Producto ||--|{ Factura_Producto
+@enduml

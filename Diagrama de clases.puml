@@ -1,4 +1,4 @@
-@startuml
+@startuml Diagrama de clases
 skinparam classAttributeIconSize 0
 class CSVLoader{
 + getParser(filePath : String) : CSVParser

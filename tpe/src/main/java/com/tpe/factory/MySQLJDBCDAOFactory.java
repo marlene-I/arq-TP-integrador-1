@@ -22,6 +22,18 @@ public class MySQLJDBCDAOFactory extends DAOFactory{
   static String user = "root";
   static String password = "password";
   static Connection connection;
+  static MySQLJDBCDAOFactory instance;
+
+  private MySQLJDBCDAOFactory(){
+    super();
+  }
+
+  public static MySQLJDBCDAOFactory getInstance(){
+    if(instance == null){
+      instance = new MySQLJDBCDAOFactory();
+    }
+    return instance;
+  }
 
   public static Connection getConnection() throws SQLException{
     if(connection != null){
