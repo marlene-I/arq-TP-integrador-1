@@ -17,13 +17,17 @@ public class Main {
   
     // // // 2. pedirle a la dbFactory los DAOS de entidades requeridos
     FacturaDAO daoFactura = mysqlDaoFactory.getFacturaDAO();
+    ClienteDAO clienteDAO = mysqlDaoFactory.getClienteDAO();
+    ProductoDAO daoProducto = mysqlDaoFactory.getProductoDAO();
+
     try {
       daoFactura.createTable();
       CSVLoader loader = new CSVLoader();
       loader.loadFacturas(daoFactura);
-          
+      daoFactura.createTable();      
       
     } catch (Exception e) {
+      e.printStackTrace();
       // TODO: handle exception
     }
 
@@ -71,10 +75,10 @@ public class Main {
   //   Connection conn = connector.getConnection();
 
   //   ArrayList<String> queries = new ArrayList<String>();
-  //   queries.add("CREATE TABLE cliente(idCliente INT, nombre VARCHAR(200), email VARCHAR(200))");
-  //   queries.add("CREATE TABLE factura(idFactura INT, idCliente INT)");
-  //   queries.add("CREATE TABLE producto(idProducto INT, nombre VARCHAR(200), valor INT)");
-  //   queries.add("CREATE TABLE factura_producto(idFactura INT, idProducto INT, cantidad INT)");
+  //   queries.add("CREATE TABLE IF NOT EXISTS cliente(idCliente INT, nombre VARCHAR(200), email VARCHAR(200))");
+  //   queries.add("CREATE TABLE IF NOT EXISTS factura(idFactura INT, idCliente INT)");
+  //   queries.add("CREATE TABLE IF NOT EXISTS producto(idProducto INT, nombre VARCHAR(200), valor INT)");
+  //   queries.add("CREATE TABLE IF NOT EXISTS factura_producto(idFactura INT, idProducto INT, cantidad INT)");
 
   //   for (String query : queries) {
   //     PreparedStatement ps = conn.prepareStatement(query);
@@ -84,37 +88,6 @@ public class Main {
   //   conn.commit();
   //   conn.close();
   // }
-
-  private static void selectAll(Connection conn)  throws SQLException{
-    String query = "SELECT * FROM people";
-    PreparedStatement ps = conn.prepareStatement(query);
-    ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            System.out.println(rs.getInt("id") + ", " + rs.getString("name") + ", " + rs.getInt("age") );
-          }
-        conn.commit();
-    ps.executeQuery();
-    ps.close();
-  }
-
-  private static void addPerson(Connection connection, int id, String name, int age) throws SQLException {
-        String query = "INSERT INTO people (id, name, age, adress_id) VALUES (?,?,?,?), ()";
-        PreparedStatement ps = connection.prepareStatement(query);
-        ps.setInt(1, id);
-        ps.setString(2, name);
-        ps.setInt(3, age);
-        ps.setInt(4, 1);
-        ps.executeUpdate();
-        ps.close();
-        connection.commit();
-    }
-
-  
-  private static void createTablePeople(Connection connection) throws SQLException {
-    String query = "CREATE TABLE people(id INT, name VARCHAR(200), age INT, adress_id INT, PRIMARY KEY(id))";
-    connection.prepareStatement(query).execute();
-    connection.commit();
-  }
 
   
 }

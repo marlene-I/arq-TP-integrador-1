@@ -22,7 +22,7 @@ public class MySQLJDBCDAOFactory extends DAOFactory{
     try {
       Class.forName(driver).getDeclaredConstructor().newInstance();
       connection = DriverManager.getConnection(uri, user, password);
-      connection.setAutoCommit(true);
+      connection.setAutoCommit(false);
       return connection;
     } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException ex) {
       throw new RuntimeException(ex);

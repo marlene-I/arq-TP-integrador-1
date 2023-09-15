@@ -16,7 +16,7 @@ public class MySQLFacturaProductoDAO implements FacturaProductoDAO{
 
     ps.setInt(1, element.getIdFactura());
     ps.setInt(2, element.getIdProducto());
-    ps.setInt(2, element.getCantidad());
+    ps.setInt(3, element.getCantidad());
     ps.executeUpdate();
    
   }
@@ -25,7 +25,7 @@ public class MySQLFacturaProductoDAO implements FacturaProductoDAO{
   public void createTable() throws SQLException {
     Connection conn = MySQLJDBCDAOFactory.getConnection();
 
-    String query = "CREATE TABLE factura_producto(idFactura INT, idProducto INT, cantidad INT)";
+    String query = "CREATE TABLE IF NOT EXISTS factura_producto(idFactura INT, idProducto INT, cantidad INT), FOREIGN KEY (idProducto) REFERENCES producto (idProducto), FOREIGN KEY (idFactura) REFERENCES factura (idFactura)";
   
     PreparedStatement ps = conn.prepareStatement(query);
 
