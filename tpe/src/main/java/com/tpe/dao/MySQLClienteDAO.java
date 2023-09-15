@@ -2,7 +2,11 @@ package com.tpe.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List; 
+import java.util.ArrayList;
+
 
 import com.tpe.dto.Cliente;
 import com.tpe.factory.MySQLJDBCDAOFactory;
@@ -48,6 +52,22 @@ public class MySQLClienteDAO implements ClienteDAO{
     ps.executeUpdate();
 
   }
+  @Override
+  public List<Cliente> obtenerClientesQueMasFacturaron(){
+    ArrayList<Cliente> clientesMasFacturaron = new ArrayList<Cliente>();
 
+    String query = "SELECT f.idCliente, c.nombre, c.email, SUM(facturaP.cantidad * prod.valor) AS total_facturado FROM factura_producto facturaP INNER JOIN producto prod ON prod.idProducto = facturaP.idProducto INNER JOIN factura f ON f.idFactura = facturaP.idFactura INNER JOIN cliente c ON c.idCliente = f.idCliente GROUP BY f.idCliente, c.nombre, c.email ORDER BY total_facturado DESC";
+    Connection conn = MySQLJDBCDAOFactory.getConnection();
+
+    PreparedStatement ps = conn.prepareStatement(query);
+    
+    ResultSet rs = ps.executeQuery();
+
+    while(rs.next()){
+      Cliente cliente = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3));
+      clientesMasFacturaron.add(cliente);
+    }
+    return clientesMasFacturaron;
+  }
   
 }
