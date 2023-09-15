@@ -55,7 +55,7 @@ public class MySQLFacturaDAO implements FacturaDAO{
   public void createTable() throws SQLException {
     Connection conn = MySQLJDBCDAOFactory.getConnection();
 
-    String query = "CREATE TABLE IF NOT EXISTS factura(idFactura INT, idCliente INT), PRIMARY KEY (idFactura), FOREIGN KEY (idCliente) REFERENCES cliente (idCliente)";
+    String query = "CREATE TABLE IF NOT EXISTS factura (idFactura INT, idCliente INT, PRIMARY KEY (idFactura), FOREIGN KEY (idCliente) REFERENCES cliente (idCliente))";
   
     PreparedStatement ps = conn.prepareStatement(query);
 
@@ -63,5 +63,3 @@ public class MySQLFacturaDAO implements FacturaDAO{
     conn.commit();
   }
 }
-
-

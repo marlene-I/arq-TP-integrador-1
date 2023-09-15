@@ -21,7 +21,7 @@ public class CSVLoader{
 
   
 
-  public void loadCliente(DAO<Cliente> daoCliente){
+  public void loadClientes(DAO<Cliente> daoCliente){
    try {
     
     CSVParser parser = this.getParser("tpe\\src\\main\\resources\\clientes.csv");
@@ -34,7 +34,7 @@ public class CSVLoader{
   }
 
 
-  public void loadProducto(DAO<Producto> daoProducto){
+  public void loadProductos(DAO<Producto> daoProducto){
    try {
     
     CSVParser parser = this.getParser("tpe\\src\\main\\resources\\productos.csv");
@@ -61,12 +61,12 @@ public class CSVLoader{
   }
 
     
-  public void loadFacturaProducto(DAO<FacturaProducto> daoFacturaProducto){
+  public void loadFacturaProductos(DAO<FacturaProducto> daoFacturaProducto){
    try {
     
     CSVParser parser = this.getParser("tpe\\src\\main\\resources\\facturas-productos.csv");
     for(CSVRecord row: parser) {     
-      daoFacturaProducto.insert(new FacturaProducto(Integer.parseInt(row.get("idFactura")), Integer.parseInt(row.get("idProducto"))));
+      daoFacturaProducto.insert(new FacturaProducto(Integer.parseInt(row.get("idFactura")), Integer.parseInt(row.get("idProducto")), Integer.parseInt(row.get("cantidad"))));
     }
    } catch (Exception e) {
       e.printStackTrace();

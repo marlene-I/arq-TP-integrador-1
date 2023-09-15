@@ -5,9 +5,10 @@ public class FacturaProducto {
   Integer idProducto;
   Integer cantidad;
   
-  public FacturaProducto(Integer idFactura, Integer idProducto) {
+  public FacturaProducto(Integer idFactura, Integer idProducto, Integer cantidad) {
     this.idFactura = idFactura;
     this.idProducto = idProducto;
+    this.cantidad = cantidad;
   }
 
   public Integer getIdFactura() {
@@ -33,6 +34,5 @@ public class FacturaProducto {
   public void setCantidad(Integer cantidad) {
     this.cantidad = cantidad;
   }
-
-  
+ 
 }

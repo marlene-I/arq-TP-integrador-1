@@ -38,7 +38,7 @@ public class MySQLProductoDAO implements ProductoDAO{
   public void createTable() throws SQLException {
     Connection conn = MySQLJDBCDAOFactory.getConnection();
 
-    String query = "CREATE TABLE IF NOT EXISTS producto(idProducto INT, nombre VARCHAR(200), valor FLOAT), PRIMARY KEY (idProducto), FOREIGN KEY (idFactura) REFERENCES factura (idFactura), FOREIGN KEY (idCliente) REFERENCES cliente (idCliente)";
+    String query = "CREATE TABLE IF NOT EXISTS producto(idProducto INT, nombre VARCHAR(45), valor FLOAT, PRIMARY KEY (idProducto))";
   
     PreparedStatement ps = conn.prepareStatement(query);
 

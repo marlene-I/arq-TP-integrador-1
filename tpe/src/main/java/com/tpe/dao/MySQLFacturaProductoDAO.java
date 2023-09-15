@@ -12,7 +12,7 @@ public class MySQLFacturaProductoDAO implements FacturaProductoDAO{
 
   @Override
   public void insert(FacturaProducto element) throws SQLException {
-    String query = "INSERT INTO factura_producto (idFactura, idProducto, cantidad) VALUES (?, ?)";
+    String query = "INSERT INTO factura_producto (idFactura, idProducto, cantidad) VALUES (?, ?, ?)";
     
     Connection conn = MySQLJDBCDAOFactory.getConnection();
 
@@ -22,14 +22,14 @@ public class MySQLFacturaProductoDAO implements FacturaProductoDAO{
     ps.setInt(2, element.getIdProducto());
     ps.setInt(3, element.getCantidad());
     ps.executeUpdate();
-   
+    conn.commit();
   }
 
   @Override
   public void createTable() throws SQLException {
     Connection conn = MySQLJDBCDAOFactory.getConnection();
 
-    String query = "CREATE TABLE IF NOT EXISTS factura_producto(idFactura INT, idProducto INT, cantidad INT), FOREIGN KEY (idProducto) REFERENCES producto (idProducto), FOREIGN KEY (idFactura) REFERENCES factura (idFactura)";
+    String query = "CREATE TABLE IF NOT EXISTS factura_producto(idFactura INT, idProducto INT, cantidad INT, FOREIGN KEY (idProducto) REFERENCES producto (idProducto), FOREIGN KEY (idFactura) REFERENCES factura (idFactura))";
   
     PreparedStatement ps = conn.prepareStatement(query);
 

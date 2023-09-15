@@ -1,9 +1,9 @@
 package com.tpe.factory;
 
-import java.sql.Connection;
 
 import com.tpe.interfaces.ClienteDAO;
 import com.tpe.interfaces.FacturaDAO;
+import com.tpe.interfaces.FacturaProductoDAO;
 import com.tpe.interfaces.ProductoDAO;
 
 public abstract class DAOFactory {
@@ -12,6 +12,7 @@ public abstract class DAOFactory {
   public abstract FacturaDAO getFacturaDAO();
   public abstract ProductoDAO getProductoDAO();
   public abstract ClienteDAO getClienteDAO();
+  public abstract FacturaProductoDAO getFacturaProductoDAO();
 
   public static DAOFactory getDAOFactory(int whichFactory) {
     switch (whichFactory) {

@@ -6,9 +6,11 @@ import java.sql.SQLException;
 
 import com.tpe.dao.MySQLClienteDAO;
 import com.tpe.dao.MySQLFacturaDAO;
+import com.tpe.dao.MySQLFacturaProductoDAO;
 import com.tpe.dao.MySQLProductoDAO;
 import com.tpe.interfaces.ClienteDAO;
 import com.tpe.interfaces.FacturaDAO;
+import com.tpe.interfaces.FacturaProductoDAO;
 import com.tpe.interfaces.ProductoDAO;
 
 
@@ -54,5 +56,9 @@ public class MySQLJDBCDAOFactory extends DAOFactory{
     return new MySQLClienteDAO();
   }
 
+  @Override
+  public FacturaProductoDAO getFacturaProductoDAO() {
+    return new MySQLFacturaProductoDAO();
+  }
 
 }

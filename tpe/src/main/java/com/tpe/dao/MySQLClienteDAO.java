@@ -26,7 +26,7 @@ public class MySQLClienteDAO implements ClienteDAO{
   public void createTable() throws SQLException {
     Connection conn = MySQLJDBCDAOFactory.getConnection();
 
-    String query = "CREATE TABLE IF NOT EXISTS cliente(idCliente INT, nombre VARCHAR(500), email VARCHAR(150)), PRIMARY KEY (idCliente)";
+    String query = "CREATE TABLE IF NOT EXISTS cliente(idCliente INT, nombre VARCHAR(500), email VARCHAR(150), PRIMARY KEY (idCliente))";
   
     PreparedStatement ps = conn.prepareStatement(query);
 
