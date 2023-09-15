@@ -7,6 +7,12 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import com.tpe.dto.Cliente;
+import com.tpe.dto.Factura;
+import com.tpe.dto.FacturaProducto;
+import com.tpe.dto.Producto;
+import com.tpe.interfaces.DAO;
+
 public class CSVLoader{
   
   public CSVParser getParser(String filePath) throws IOException{

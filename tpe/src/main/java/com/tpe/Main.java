@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.mysql.cj.xdevapi.Client;
+import com.tpe.factory.DAOFactory;
+import com.tpe.interfaces.ClienteDAO;
+import com.tpe.interfaces.FacturaDAO;
+import com.tpe.interfaces.FacturaProductoDAO;
+import com.tpe.interfaces.ProductoDAO;
 
 public class Main {
 
@@ -16,12 +21,12 @@ public class Main {
     DAOFactory mysqlDaoFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL_JDBC);
   
     // // // 2. pedirle a la dbFactory los DAOS de entidades requeridos
-    FacturaDAO daoFactura = mysqlDaoFactory.getFacturaDAO();
-    ClienteDAO clienteDAO = mysqlDaoFactory.getClienteDAO();
-    ProductoDAO daoProducto = mysqlDaoFactory.getProductoDAO();
-
-    try {
-      daoFactura.createTable();
+      FacturaDAO daoFactura = mysqlDaoFactory.getFacturaDAO();
+      ClienteDAO daoCliente = mysqlDaoFactory.getClienteDAO();
+      ProductoDAO daoProducto = mysqlDaoFactory.getProductoDAO();
+      //FacturaProductoDAO daoFacturaProducto = mysqlDaoFactory.getFacturaProductoDAO();
+      try {
+        daoFactura.createTable();
       CSVLoader loader = new CSVLoader();
       loader.loadFacturas(daoFactura);
       daoFactura.createTable();      
