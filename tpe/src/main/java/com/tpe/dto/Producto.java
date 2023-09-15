@@ -3,15 +3,12 @@ package com.tpe.dto;
 public class Producto {
   Integer id;
   String nombre;
-  Integer valor;
+  Float valor;
 
   
-  public Producto(){
-    super();
-  }
-  
+ 
    
-  public Producto(Integer id, String nombre, Integer valor) {
+  public Producto(Integer id, String nombre, Float valor) {
     this.id = id;
     this.nombre = nombre;
     this.valor = valor;
@@ -38,12 +35,12 @@ public class Producto {
   }
 
 
-  public Integer getValor() {
+  public Float getValor() {
     return valor;
   }
 
 
-  public void setValor(Integer valor) {
+  public void setValor(Float valor) {
     this.valor = valor;
   }
 

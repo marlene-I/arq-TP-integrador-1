@@ -39,7 +39,7 @@ public class CSVLoader{
     
     CSVParser parser = this.getParser("tpe\\src\\main\\resources\\productos.csv");
     for(CSVRecord row: parser) {     
-      daoProducto.insert(new Producto(Integer.parseInt(row.get("idProducto")), row.get("nombre"), Integer.parseInt(row.get("valor"))));
+      daoProducto.insert(new Producto(Integer.parseInt(row.get("idProducto")), row.get("nombre"), Float.parseFloat(row.get("valor"))));
     }
    } catch (Exception e) {
       e.printStackTrace();

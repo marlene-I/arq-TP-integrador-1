@@ -1,5 +1,6 @@
 package com.tpe;
 
+import com.tpe.dto.Producto;
 import com.tpe.factory.DAOFactory;
 import com.tpe.interfaces.ClienteDAO;
 import com.tpe.interfaces.FacturaDAO;
@@ -32,6 +33,16 @@ public class Main {
 
         daoFacturaProducto.createTable();
         loader.loadFacturaProductos(daoFacturaProducto);
+
+        Producto productoMayorRecaudacion = daoProducto.getProductoMayorRecaudacion();
+            if (productoMayorRecaudacion != null) {
+                System.out.println("Producto con mayor recaudación:");
+                System.out.println("ID: " + productoMayorRecaudacion.getId());
+                System.out.println("Nombre: " + productoMayorRecaudacion.getNombre());
+                System.out.println("Valor Unitario: " + productoMayorRecaudacion.getValor());
+            } else {
+                System.out.println("No se encontró ningún producto con recaudación.");
+            }
       
     } catch (Exception e) {
       e.printStackTrace();
