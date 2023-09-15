@@ -1,5 +1,6 @@
 @startuml Diagrama de clases
 skinparam classAttributeIconSize 0
+skinparam linetype ortho
 class CSVLoader{
 + getParser(filePath : String) : CSVParser
 + loadClientes(daoCliente : DAO<Cliente>) : void
