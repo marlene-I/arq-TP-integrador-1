@@ -52,7 +52,9 @@ public class Main {
         }
       
         List<Cliente> clientesPorFacturacion = daoCliente.getClientesPorFacturacion();
-
+        System.out.println();
+        System.out.println("Clientes ordenados por mayor facturacion");
+        
         System.out.println("id   |   nombre  | email  |  total_facturado ");
         for (Cliente cliente : clientesPorFacturacion) {
           ClienteConFacturacion clienteFacturacion = (ClienteConFacturacion) cliente;
