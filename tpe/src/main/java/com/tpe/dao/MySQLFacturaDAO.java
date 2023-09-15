@@ -44,7 +44,7 @@ public class MySQLFacturaDAO implements FacturaDAO{
     Connection conn = MySQLJDBCDAOFactory.getConnection();
 
     PreparedStatement ps = conn.prepareStatement(query);
-    System.out.println(element.getId() +"," + element.getIdCliente() );
+    
     ps.setInt(1, element.getId());
     ps.setInt(2, element.getIdCliente());
     ps.executeUpdate();
